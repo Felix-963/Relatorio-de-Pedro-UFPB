@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Matheus Felix de Assunção">
+<meta name="dcterms.date" content="2025-07-24">
+
+<title>Relatório em Quarto + GitHub</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Relatorio_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Relatorio_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Relatorio_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Relatorio_files/libs/quarto-html/popper.min.js"></script>
+<script src="Relatorio_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Relatorio_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Relatorio_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Relatorio_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Relatorio_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Relatorio_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Relatorio_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
+  <li><a href="#git-e-github" id="toc-git-e-github" class="nav-link" data-scroll-target="#git-e-github">Git e GitHub</a></li>
+  <li><a href="#conceitos-iniciais-de-python" id="toc-conceitos-iniciais-de-python" class="nav-link" data-scroll-target="#conceitos-iniciais-de-python">Conceitos Iniciais de Python</a></li>
+  <li><a href="#pip" id="toc-pip" class="nav-link" data-scroll-target="#pip">pip</a></li>
+  <li><a href="#passo-a-passo" id="toc-passo-a-passo" class="nav-link" data-scroll-target="#passo-a-passo">Passo a Passo</a></li>
+  <li><a href="#exemplos-práticos-de-instalação-com-pip" id="toc-exemplos-práticos-de-instalação-com-pip" class="nav-link" data-scroll-target="#exemplos-práticos-de-instalação-com-pip">Exemplos Práticos de Instalação com <code>pip</code></a></li>
+  <li><a href="#funções-em-python-seus-blocos-de-código-reutilizáveis" id="toc-funções-em-python-seus-blocos-de-código-reutilizáveis" class="nav-link" data-scroll-target="#funções-em-python-seus-blocos-de-código-reutilizáveis">Funções em Python: Seus Blocos de Código Reutilizáveis</a></li>
+  <li><a href="#boas-práticas-em-python-como-escrever-um-código-top" id="toc-boas-práticas-em-python-como-escrever-um-código-top" class="nav-link" data-scroll-target="#boas-práticas-em-python-como-escrever-um-código-top">Boas Práticas em Python: Como Escrever um Código Top!</a></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Relatório em Quarto + GitHub</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Matheus Felix de Assunção </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 24, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2">
+<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
+<p>Este relatório apresenta ferramentas e conceitos importantes para quem está começando a aprender programação e trabalhar com dados. Vamos conhecer o <strong>Git e o GitHub</strong> para poder salvar e gurdar nossas versos projetos, e ter uma rede social onde podemos ver ideias de outras pessoas que estão trabalhando com dados, o <strong>pip</strong> para instalar pacotes no Python, e os <strong>conceitos básicos da linguagem Python</strong>. Esses assuntos são muito importantes para quem deseja atuar na área de dados e outras tecnologias.</p>
+<hr>
+</section>
+<section id="git-e-github" class="level2">
+<h2 class="anchored" data-anchor-id="git-e-github">Git e GitHub</h2>
+<p>Git e GitHub são ferramentas poderosas para controlar as mudanças no seu código e colaborar com outras pessoas.</p>
+<section id="historia-do-git" class="level3">
+<h3 class="anchored" data-anchor-id="historia-do-git">Historia do Git:</h3>
+<p>O Git nasceu em 2005 de uma necessidade muito específica e urgente. Seu criador foi ninguém menos que Linus Torvalds, o mesmo gênio por trás da criação do sistema operacional Linux.</p>
+<div id="fig-linus" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://antlia.com.br/wp-content/uploads/2023/08/Linus.jpg" id="fig-linus" class="img-fluid quarto-figure quarto-figure-center anchored figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-linus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p><strong>Porque ele criou o GIT?</strong></p>
+<p>Antes do Git, o desenvolvimento do kernel do Linux (o “coração” do sistema operacional) era gerenciado por um sistema de controle de versão proprietário chamado BitKeeper. Esse sistema era muito bom e eficiente, mas em 2005, a relação entre a empresa que o desenvolvia e a comunidade Linux se deteriorou. O acesso gratuito ao BitKeeper foi revogado, deixando Linus Torvalds e sua equipe de milhares de desenvolvedores sem uma ferramenta para gerenciar o código de forma colaborativa.</p>
+<p><strong>Qual foi a solução dele?</strong></p>
+<p>Linus Torvalds, conhecido por sua abordagem pragmática, decidiu que, em vez de procurar outro sistema pago ou se adaptar a um gratuito existente que não atendia às suas necessidades, ele criaria um novo. O objetivo era ter um sistema:</p>
+<ul>
+<li><p>Distribuído : Onde cada desenvolvedor teria uma cópia completa do histórico do projeto.</p></li>
+<li><p>Extremamente rápido: Capaz de lidar com o enorme volume de mudanças no kernel do Linux.</p></li>
+<li><p>Capaz de garantir a integridade dos dados: Para evitar que o código fosse corrompido.</p></li>
+</ul>
+<p>Em apenas duas semanas, Linus escreveu o núcleo do Git. Ele foi projetado para ser uma ferramenta de baixo nível, robusta e eficiente para a qual outras interfaces pudessem ser construídas. O nome “Git” é uma gíria britânica para “cabeça dura” ou “idiota”, que Linus escolheu de forma irônica, referindo-se a si mesmo ou à frustração com os sistemas anteriores.</p>
+<p>O Git rapidamente provou ser um sucesso e se tornou o padrão ouro para controle de versão em projetos de software, indo muito além do kernel do Linux.</p>
+</section>
+<section id="historia-do-github" class="level3">
+<h3 class="anchored" data-anchor-id="historia-do-github">Historia do GitHub</h3>
+<p><strong>O Nascimento do GitHub!</strong></p>
+<p>O GitHub foi fundado em 2008 por um quarteto visionário: Tom Preston-Werner, Chris Wanstrath, P.J. Hyett e Scott Chacon. A ideia central era criar uma plataforma que não apenas hospedasse repositórios Git, mas que também incentivasse a interação social e a colaboração entre desenvolvedores. Eles construíram o serviço utilizando a framework de desenvolvimento web Ruby on Rails.<img src="https://alonza.com.br/wp-content/uploads/2023/08/GitHub.jpg" class="img-fluid"></p>
+<p>O foco inicial era aprimorar a experiência de trabalho em equipe, oferecendo funcionalidades que simplificassem a revisão de código, o rastreamento de problemas e a integração de contribuições. O GitHub rapidamente se destacou por sua interface intuitiva e pelas ferramentas que tornavam o processo de desenvolvimento colaborativo muito mais acessível do que as alternativas existentes na época.</p>
+</section>
+<section id="o-propósito-do-git-e-do-github." class="level3">
+<h3 class="anchored" data-anchor-id="o-propósito-do-git-e-do-github.">O Propósito do Git e do GitHub.</h3>
+<p>Pense no Git e no GitHub como parceiros indispensáveis para quem cria software ou lida com código hoje em dia. Eles trabalham juntos, e cada um tem um papel fundamental.</p>
+<ul>
+<li><p>O <strong>Git</strong> é como a memória do seu projeto. Ele registra cada alteração que você faz no código, permitindo que você navegue por versões passadas, identifique quem fez o que e quando, e integre contribuições de diferentes pessoas sem dores de cabeça. É a ferramenta que mantém a ordem e a rastreabilidade de todas as modificações.</p></li>
+<li><p>Já o <strong>GitHub</strong> é o ponto de encontro online para seus projetos. É onde seu código, que o Git controla, fica guardado na internet. Mais do que um simples backup, ele transforma o processo de desenvolvimento em algo colaborativo e social. No GitHub, equipes podem trabalhar no mesmo código de forma sincronizada, revisar o trabalho um do outro e gerenciar o projeto de maneira centralizada.</p></li>
+</ul>
+</section>
+<section id="comandos-básicos" class="level3">
+<h3 class="anchored" data-anchor-id="comandos-básicos">Comandos básicos</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git init</code></td>
+<td>Inicializa um repositório local</td>
+</tr>
+<tr class="even">
+<td><code>git add .</code></td>
+<td>Adiciona arquivos ao controle de versão</td>
+</tr>
+<tr class="odd">
+<td><code>git commit -m</code></td>
+<td>Salva as alterações com uma mensagem</td>
+</tr>
+<tr class="even">
+<td><code>git push</code></td>
+<td>Envia mudanças ao repositório remoto</td>
+</tr>
+<tr class="odd">
+<td><code>git pull</code></td>
+<td>Atualiza o repositório local</td>
+</tr>
+<tr class="even">
+<td><code>git clone</code></td>
+<td>Copia um repositório existente</td>
+</tr>
+<tr class="odd">
+<td><code>git status</code></td>
+<td>Mostra o estado atual do repositório</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="repositório-e-commit" class="level3">
+<h3 class="anchored" data-anchor-id="repositório-e-commit">Repositório e Commit</h3>
+<ul>
+<li><strong>Repositório:</strong> onde o projeto e seu histórico são gurdados.</li>
+<li><strong>Commit:</strong> um registro de alteração com uma descrição.</li>
+</ul>
+</section>
+</section>
+<section id="conceitos-iniciais-de-python" class="level2">
+<h2 class="anchored" data-anchor-id="conceitos-iniciais-de-python">Conceitos Iniciais de Python</h2>
+<p>Python é uma linguagem de programação muito popular, conhecida por ser fácil de ler e poderosa. É um ótimo ponto de partida para quem está começando!</p>
+<section id="tipos-de-dados" class="level3">
+<h3 class="anchored" data-anchor-id="tipos-de-dados">Tipos de Dados</h3>
+<p>No Python, cada informação tem um tipo. Os mais comuns são:</p>
+<ul>
+<li><strong>int</strong> (inteiro): números inteiros, sem vírgula. Ex: <code>10</code>, <code>150</code>, <code>-5</code>.</li>
+<li><strong>float</strong> (ponto flutuante): números com vírgula. Ex: <code>3.14</code>, <code>99.99</code>.</li>
+<li><strong>str</strong> (string): textos entre aspas. Ex: <code>"Olá, mundo!"</code>, <code>'Python é legal'</code>.</li>
+<li><strong>bool</strong> (booleano): valores lógicos: <code>True</code> (verdadeiro) ou <code>False</code> (falso).</li>
+</ul>
+</section>
+<section id="variáveis-e-operadores-básicos" class="level3">
+<h3 class="anchored" data-anchor-id="variáveis-e-operadores-básicos">Variáveis e Operadores Básicos</h3>
+<p>Variáveis são como “caixas” que guardam informações. Operadores servem para fazer contas ou comparações.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>idade <span class="op">=</span> <span class="dv">30</span>        <span class="co"># variável do tipo int</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>nome <span class="op">=</span> <span class="st">"Carlos"</span>   <span class="co"># variável do tipo str</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>soma <span class="op">=</span> x <span class="op">+</span> y      <span class="co"># soma = 15</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>eh_maior <span class="op">=</span> x <span class="op">&gt;</span> y  <span class="co"># eh_maior = True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Aritméticos:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+<li><strong>Comparação:</strong> <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+</ul>
+</section>
+<section id="listas-tuplas-e-dicionários" class="level3">
+<h3 class="anchored" data-anchor-id="listas-tuplas-e-dicionários">Listas, Tuplas e Dicionários</h3>
+<p>São formas de guardar várias informações juntas.</p>
+<section id="lista" class="level4">
+<h4 class="anchored" data-anchor-id="lista">Lista</h4>
+<p>Coleção ordenada e mutável (pode mudar depois de criada). Usa colchetes <code>[]</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>frutas <span class="op">=</span> [<span class="st">"maçã"</span>, <span class="st">"banana"</span>, <span class="st">"uva"</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>frutas.append(<span class="st">"laranja"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frutas[<span class="dv">0</span>])  <span class="co"># "maçã"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tupla" class="level4">
+<h4 class="anchored" data-anchor-id="tupla">Tupla</h4>
+<p>Coleção ordenada e <strong>imutável</strong>. Usa parênteses <code>()</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>coordenadas <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(coordenadas[<span class="dv">1</span>])  <span class="co"># 20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dicionário" class="level4">
+<h4 class="anchored" data-anchor-id="dicionário">Dicionário</h4>
+<p>Coleção de pares <code>chave: valor</code>. Usa chaves <code>{}</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pessoa <span class="op">=</span> {<span class="st">"nome"</span>: <span class="st">"Maria"</span>, <span class="st">"idade"</span>: <span class="dv">25</span>, <span class="st">"cidade"</span>: <span class="st">"João Pessoa"</span>}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pessoa[<span class="st">"nome"</span>])    <span class="co"># "Maria"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pessoa[<span class="st">"idade"</span>] <span class="op">=</span> <span class="dv">26</span>     <span class="co"># altera a idade</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="estruturas-de-controle" class="level3">
+<h3 class="anchored" data-anchor-id="estruturas-de-controle">Estruturas de Controle</h3>
+<p>Controlam o fluxo do programa.</p>
+<section id="condicionais-if-elif-else" class="level4">
+<h4 class="anchored" data-anchor-id="condicionais-if-elif-else">Condicionais (<code>if</code>, <code>elif</code>, <code>else</code>)</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nota <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> nota <span class="op">&gt;=</span> <span class="dv">70</span>:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Aprovado!"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> nota <span class="op">&gt;=</span> <span class="dv">50</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Em recuperação."</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Reprovado."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="laço-for" class="level4">
+<h4 class="anchored" data-anchor-id="laço-for">Laço <code>for</code></h4>
+<p>Repete algo para cada item de uma sequência.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> numeros:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="laço-while" class="level4">
+<h4 class="anchored" data-anchor-id="laço-while">Laço <code>while</code></h4>
+<p>Repete enquanto a condição for verdadeira.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>contador <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> contador <span class="op">&lt;</span> <span class="dv">3</span>:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Contador: </span><span class="sc">{</span>contador<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    contador <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="funções" class="level3">
+<h3 class="anchored" data-anchor-id="funções">Funções</h3>
+<p>Funções são blocos de código reutilizáveis.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> saudar(nome):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Retorna uma saudação personalizada."""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Olá, </span><span class="sc">{</span>nome<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mensagem <span class="op">=</span> saudar(<span class="st">"Aluno"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mensagem)  <span class="co"># Olá, Aluno!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="pip" class="level2">
+<h2 class="anchored" data-anchor-id="pip">pip</h2>
+<section id="o-que-é" class="level3">
+<h3 class="anchored" data-anchor-id="o-que-é">O que é?</h3>
+<p>O <strong>pip</strong> é uma ferramenta muito importante para quem programa em Python. Ela funciona como o gerenciador oficial de pacotes da linguagem. Basicamente, quando a gente precisa usar alguma funcionalidade que não vem no Python “básico” – como uma biblioteca para análise de dados ou para criar gráficos –, o <strong>pip</strong> é quem nos ajuda a instalar, atualizar ou remover esses pacotes que foram criados por outros desenvolvedores.</p>
+</section>
+<section id="como-instalar-pacotes-no-python" class="level3">
+<h3 class="anchored" data-anchor-id="como-instalar-pacotes-no-python">Como instalar pacotes no Python</h3>
+<p>Você instala pacotes usando o comando pip install diretamente no seu terminal ou prompt de comando.</p>
+<div id="fig-linus" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://acadianschool.com.br/wp-content/uploads/2023/09/how-to-install-pip-on-windows.png" id="fig-linus" class="img-fluid quarto-figure quarto-figure-center anchored figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-linus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="passo-a-passo" class="level2">
+<h2 class="anchored" data-anchor-id="passo-a-passo">Passo a Passo</h2>
+<section id="abra-o-terminal" class="level3">
+<h3 class="anchored" data-anchor-id="abra-o-terminal">Abra o Terminal</h3>
+<ul>
+<li><p><strong>No Windows:</strong> Você pode pesquisar por <code>"Prompt de Comando"</code> ou <code>"PowerShell"</code> no menu Iniciar e abri-lo.</p></li>
+<li><p><strong>No macOS/Linux:</strong> Abra o aplicativo <code>"Terminal"</code>.</p></li>
+</ul>
+</section>
+<section id="digite-o-comando-de-instalação" class="level3">
+<h3 class="anchored" data-anchor-id="digite-o-comando-de-instalação">Digite o Comando de Instalação</h3>
+<p>A sintaxe básica para instalar um pacote com o <code>pip</code> é:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install nome_do_pacote</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="exemplos-práticos-de-instalação-com-pip" class="level2">
+<h2 class="anchored" data-anchor-id="exemplos-práticos-de-instalação-com-pip">Exemplos Práticos de Instalação com <code>pip</code></h2>
+<p>Vamos ver alguns exemplos de instalação de bibliotecas populares usando o <code>pip</code>:</p>
+<section id="instalar-o-pandas-análise-de-dados" class="level3">
+<h3 class="anchored" data-anchor-id="instalar-o-pandas-análise-de-dados">Instalar o <code>pandas</code> (análise de dados)</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="instalar-o-numpy-operações-numéricas" class="level3">
+<h3 class="anchored" data-anchor-id="instalar-o-numpy-operações-numéricas">Instalar o <code>numpy</code> (operações numéricas)</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="instalar-o-matplotlib-criação-de-gráficos" class="level3">
+<h3 class="anchored" data-anchor-id="instalar-o-matplotlib-criação-de-gráficos">Instalar o <code>matplotlib</code> (criação de gráficos)</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install matplotlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="instalar-uma-versão-específica-de-um-pacote" class="level3">
+<h3 class="anchored" data-anchor-id="instalar-uma-versão-específica-de-um-pacote">Instalar uma versão específica de um pacote</h3>
+<p>Isso pode ser útil para garantir compatibilidade com outros pacotes:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install requests==2.28.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Isso instalará a versão <code>2.28.1</code> da biblioteca <code>requests</code>.</p>
+</blockquote>
+</section>
+<section id="atualizar-um-pacote-para-a-versão-mais-recente" class="level3">
+<h3 class="anchored" data-anchor-id="atualizar-um-pacote-para-a-versão-mais-recente">Atualizar um pacote para a versão mais recente</h3>
+<p>Use o <code>--upgrade</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> nome_do_pacote</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Exemplo: atualizar o <code>pandas</code>:</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="funções-em-python-seus-blocos-de-código-reutilizáveis" class="level2">
+<h2 class="anchored" data-anchor-id="funções-em-python-seus-blocos-de-código-reutilizáveis">Funções em Python: Seus Blocos de Código Reutilizáveis</h2>
+<p>Funções em Python são como pequenas <em>“receitas”</em> que você cria para realizar tarefas específicas no seu programa.<br>
+A grande vantagem é que, ao invés de escrever o mesmo código várias vezes, você o define uma vez só em uma função e pode usá-lo sempre que precisar.<br>
+Isso deixa seu código mais <strong>organizado</strong> e <strong>fácil de entender</strong>.</p>
+<hr>
+<section id="definindo-funções-com-def" class="level3">
+<h3 class="anchored" data-anchor-id="definindo-funções-com-def">Definindo Funções com <code>def</code></h3>
+<p>Para criar uma função, você usa a palavra-chave <code>def</code>, seguida do nome que você escolheu para ela, e depois parênteses <code>()</code>.<br>
+É dentro desses parênteses que indicamos se a função precisa receber alguma informação para trabalhar (os <strong>parâmetros</strong>).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uma função simples que apenas mostra uma mensagem</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mostrar_mensagem():</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Olá! Bem-vindo à minha primeira função."</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Para fazer a função "acontecer", a gente a chama pelo nome:</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>mostrar_mensagem()  <span class="co"># Saída: Olá! Bem-vindo à minha primeira função.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="parâmetros-dando-informações-à-função" class="level3">
+<h3 class="anchored" data-anchor-id="parâmetros-dando-informações-à-função">Parâmetros: Dando Informações à Função</h3>
+<p>Muitas vezes, uma função precisa de dados externos para realizar sua tarefa.<br>
+Essas informações são chamadas de <strong>parâmetros</strong> (ou <strong>argumentos</strong>) e são listadas dentro dos parênteses na definição da função.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função que recebe um 'nome' como parâmetro</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> saudar_usuario(nome):</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Olá, </span><span class="sc">{</span>nome<span class="sc">}</span><span class="ss">! É um prazer ter você aqui."</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Chamadas da função com valores diferentes</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>saudar_usuario(<span class="st">"Mariana"</span>)  <span class="co"># Saída: Olá, Mariana! É um prazer ter você aqui.</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>saudar_usuario(<span class="st">"Bruno"</span>)    <span class="co"># Saída: Olá, Bruno! É um prazer ter você aqui.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Também podemos usar <strong>mais de um parâmetro</strong>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função que calcula a soma de dois números</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcular_soma(numero1, numero2):</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> numero1 <span class="op">+</span> numero2</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"A soma de </span><span class="sc">{</span>numero1<span class="sc">}</span><span class="ss"> e </span><span class="sc">{</span>numero2<span class="sc">}</span><span class="ss"> é: </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>calcular_soma(<span class="dv">15</span>, <span class="dv">7</span>)  <span class="co"># Saída: A soma de 15 e 7 é: 22</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="retorno-o-resultado-da-função" class="level3">
+<h3 class="anchored" data-anchor-id="retorno-o-resultado-da-função">Retorno: O Resultado da Função</h3>
+<p>Depois que uma função faz o que tem que fazer, ela pode nos devolver um <strong>resultado</strong>.<br>
+Esse resultado é o <strong>retorno</strong>, e usamos a palavra-chave <code>return</code> para isso.</p>
+<p>Se uma função <strong>não tem <code>return</code></strong>, ela retorna <code>None</code> (nada de útil).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função que multiplica dois valores e retorna o resultado</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multiplicar(valor1, valor2):</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    produto <span class="op">=</span> valor1 <span class="op">*</span> valor2</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> produto  <span class="co"># Retorna o valor da multiplicação</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Armazenando o retorno em uma variável</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>resultado_multiplicacao <span class="op">=</span> multiplicar(<span class="dv">6</span>, <span class="dv">4</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"O produto é: </span><span class="sc">{</span>resultado_multiplicacao<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Saída: O produto é: 24</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ou usando o retorno diretamente</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(multiplicar(<span class="dv">10</span>, <span class="dv">2</span>))  <span class="co"># Saída: 20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<p>Dominar <strong>funções</strong> é um passo <strong>gigante</strong> para escrever códigos mais <strong>limpos</strong>, <strong>modulares</strong> e <strong>eficientes</strong>!</p>
+</section>
+</section>
+<section id="boas-práticas-em-python-como-escrever-um-código-top" class="level2">
+<h2 class="anchored" data-anchor-id="boas-práticas-em-python-como-escrever-um-código-top">Boas Práticas em Python: Como Escrever um Código Top!</h2>
+<p>Escrever código Python não é só fazer ele funcionar; é também garantir que ele seja <strong>fácil de ler e entender</strong>. Para isso, usamos algumas <strong>boas práticas</strong> que deixam o código mais organizado e profissional.</p>
+<hr>
+<section id="comentários" class="level3">
+<h3 class="anchored" data-anchor-id="comentários">Comentários (<code>#</code>)</h3>
+<p>Comentários são <strong>anotações dentro do código</strong> que ajudam a explicar o que ele está fazendo.<br>
+Tudo o que vem depois do símbolo <code>#</code> é <strong>ignorado pelo Python</strong> e não afeta a execução do programa.</p>
+<div id="fig-linus" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://uds.com.br/blog/wp-content/uploads/2022/10/As-5-boas-praticas-de-desenvolvimento-de-software-fig1.jpg" id="fig-linus" class="img-fluid quarto-figure quarto-figure-center anchored figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-linus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3
+</figcaption>
+</figure>
+</div>
+<p>Você pode usar comentários para:</p>
+<ul>
+<li><strong>Explicar partes complexas</strong> do código.</li>
+<li><strong>Descrever o que um trecho faz</strong>.</li>
+<li><strong>Adicionar lembretes para você ou outros desenvolvedores</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="outras-boas-práticas" class="level3">
+<h3 class="anchored" data-anchor-id="outras-boas-práticas">Outras Boas Práticas</h3>
+<ul>
+<li><strong>Comentários</strong>: use <code>#</code> para explicar partes do código.</li>
+<li><strong>Nomes claros</strong>: use nomes de variáveis descritivos, como <code>idade</code>, <code>media</code>, <code>resultado</code>.</li>
+<li><strong>Identação</strong>: sempre use 4 espaços (ou <code>TAB</code>) para blocos de código, mantendo o código organizado.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
+<p>Este relatório foi criado usando o <a href="https://quarto.org">Quarto</a>, renderizado em HTML e versionado com Git.<br>
+Ele serve como base para revisarmos ferramentas e conceitos essenciais na vida de um cientista de dados e estatístico.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
